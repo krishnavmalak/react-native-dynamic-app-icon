@@ -1,5 +1,5 @@
 module.exports = {
-  preset: 'react-native',
+  preset: '@react-native/jest-preset',
   modulePathIgnorePatterns: ['<rootDir>/example/', '<rootDir>/lib/'],
   transformIgnorePatterns: [
     // Allow Jest to transform all react-native and Expo packages

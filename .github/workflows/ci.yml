@@ -39,8 +39,8 @@ jobs:
           java-version: '17'
       - name: Build Android AAR
         run: |
-          cd packages/library/android
-          ./gradlew assembleRelease
+          cd example/android
+          ./gradlew :react-native-dynamic-app-icon:assembleRelease
 
   publish:
     needs: [lint-and-test, build-android]
