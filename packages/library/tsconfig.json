@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["esnext"],
+    "allowJs": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["jest"],
+    "paths": {
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"]
+    },
+    "outDir": "lib"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib", "example"]
+}

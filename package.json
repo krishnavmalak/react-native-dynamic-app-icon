@@ -1,0 +1,9 @@
+{
+  "name": "react-native-dynamic-app-icon-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/library",
+    "example",
+    "website"
+  ]
+}

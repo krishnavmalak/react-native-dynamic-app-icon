@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Example",
+    "slug": "example",
+    "scheme": "example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/apple.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.example"
+    },
+    "android": {
+      "package": "com.example.example"
+    },
+    "plugins": [
+      [
+        "../packages/library/app.plugin.js",
+        {
+          "icons": [
+            "apple",
+            "orange",
+            "pineapple",
+            "strawberry"
+          ]
+        }
+      ]
+    ]
+  }
+}
