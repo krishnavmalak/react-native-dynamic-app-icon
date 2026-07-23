@@ -29,7 +29,7 @@ config.resolver.nodeModulesPaths = [
 config.resolver.extraNodeModules = {
   react: path.resolve(projectRoot, 'node_modules/react'),
   'react-native': path.resolve(projectRoot, 'node_modules/react-native'),
-  'react-native-mmkv': path.resolve(projectRoot, 'node_modules/react-native-mmkv'),
+  '@react-native-async-storage/async-storage': path.resolve(projectRoot, 'node_modules/@react-native-async-storage/async-storage'),
   'expo-asset': path.resolve(projectRoot, 'node_modules/expo-asset'),
   'expo-file-system': path.resolve(projectRoot, 'node_modules/expo-file-system'),
 };

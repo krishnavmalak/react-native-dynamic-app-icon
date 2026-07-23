@@ -13,7 +13,7 @@
 |---|---|---|
 | 🖼 **Dynamic App Icon** | ✅ `setAlternateIconName` | ✅ `PackageManager` activity-alias |
 | ✨ **Animated Splash Screen** | ✅ Fade, Scale, Slide | ✅ Fade, Scale, Slide |
-| 💾 **State Persistence** | ✅ MMKV encrypted storage | ✅ MMKV encrypted storage |
+| 💾 **State Persistence** | ✅ AsyncStorage persistence | ✅ AsyncStorage persistence |
 | 🚀 **New Architecture (TurboModule)** | ✅ Bridgeless / TurboModule | ✅ Bridgeless / TurboModule |
 | 📱 **Expo 57 & React Native 0.86** | ✅ Managed & Bare | ✅ Managed & Bare |
 
@@ -23,10 +23,10 @@
 
 ```bash
 # npm
-npm install react-native-dynamic-app-icon react-native-mmkv expo-asset expo-file-system
+npm install react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
 
 # yarn
-yarn add react-native-dynamic-app-icon react-native-mmkv expo-asset expo-file-system
+yarn add react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
 
 # iOS pod install
 cd ios && pod install
