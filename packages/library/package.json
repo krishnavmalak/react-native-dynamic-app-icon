@@ -1,6 +1,9 @@
 {
   "name": "@krishnavmalak/react-native-dynamic-app-icon",
   "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Complete runtime branding library for React Native New Architecture",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
