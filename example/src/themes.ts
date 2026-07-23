@@ -1,4 +1,4 @@
-import type { BrandConfig } from 'react-native-dynamic-app-icon';
+import type { BrandConfig } from '@krishnavmalak/react-native-dynamic-app-icon';
 
 export const THEMES = {
   apple: {

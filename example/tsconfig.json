@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "react-native-dynamic-app-icon": ["../packages/library/src"]
+      "@krishnavmalak/react-native-dynamic-app-icon": ["../packages/library/src"]
     }
   },
   "include": [

@@ -1,5 +1,5 @@
 {
-  "name": "react-native-dynamic-app-icon",
+  "name": "@krishnavmalak/react-native-dynamic-app-icon",
   "version": "1.0.0",
   "description": "Complete runtime branding library for React Native New Architecture",
   "main": "lib/commonjs/index.js",
@@ -64,6 +64,7 @@
     "eslint": "^8.51.0",
     "jest": "^29.7.0",
     "react-native-builder-bob": "^0.23.1",
+    "release-it": "^20.2.1",
     "typescript": "^5.2.2"
   },
   "react-native-builder-bob": {

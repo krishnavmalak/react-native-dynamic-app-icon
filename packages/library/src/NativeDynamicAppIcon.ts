@@ -2,7 +2,7 @@ import type { TurboModule } from 'react-native';
 import { TurboModuleRegistry, NativeModules } from 'react-native';
 
 /**
- * TurboModule spec for react-native-dynamic-app-icon.
+ * TurboModule spec for @krishnavmalak/react-native-dynamic-app-icon.
  */
 export interface Spec extends TurboModule {
   changeIcon(iconName: string): Promise<boolean>;

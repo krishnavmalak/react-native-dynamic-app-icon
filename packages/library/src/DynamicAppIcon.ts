@@ -6,7 +6,7 @@ import { SplashConfig, BrandConfig, AssetDownloadResult } from './types';
 
 export class DynamicAppIcon {
   static async initialize(): Promise<void> {
-    console.log(`[DynamicAppIcon] Initializing react-native-dynamic-app-icon...`);
+    console.log(`[DynamicAppIcon] Initializing @krishnavmalak/react-native-dynamic-app-icon...`);
     // Restore persisted brand config and theme from storage
     await Promise.all([
       AppIconManager.restoreBrand(),

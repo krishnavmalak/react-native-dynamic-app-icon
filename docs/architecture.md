@@ -1,8 +1,8 @@
-# Architecture & Design: react-native-dynamic-app-icon
+# Architecture & Design: @krishnavmalak/react-native-dynamic-app-icon
 
 ## 1. Overview
 
-`react-native-dynamic-app-icon` is a React Native New Architecture library that enables **full runtime branding** — app icon, splash screen, theme, and brand configuration — without an App Store release.
+`@krishnavmalak/react-native-dynamic-app-icon` is a React Native New Architecture library that enables **full runtime branding** — app icon, splash screen, theme, and brand configuration — without an App Store release.
 
 It bridges a **TypeScript API layer** to native code via a TurboModule, with encrypted MMKV persistence and an Expo Config Plugin for build-time setup.
 
