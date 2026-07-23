@@ -33,6 +33,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Prebuild example
+        run: cd example && npx expo prebuild -p android
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
@@ -42,8 +50,23 @@ jobs:
           cd example/android
           ./gradlew :react-native-dynamic-app-icon:assembleRelease
 
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Prebuild example (iOS)
+        run: cd example && npx expo prebuild -p ios
+      - name: Install CocoaPods
+        run: cd example/ios && pod install
+
   publish:
-    needs: [lint-and-test, build-android]
+    needs: [lint-and-test, build-android, build-ios]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
