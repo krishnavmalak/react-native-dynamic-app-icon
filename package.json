@@ -1,5 +1,5 @@
 {
-  "name": "@krishnavmalak/react-native-dynamic-app-icon-monorepo",
+  "name": "@krishnavmk/react-native-dynamic-app-icon-monorepo",
   "private": true,
   "workspaces": [
     "packages/library",

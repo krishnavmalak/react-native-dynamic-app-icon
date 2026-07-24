@@ -15,7 +15,7 @@ import {
   BrandProvider,
   useBranding,
   Branding,
-} from '@krishnavmalak/react-native-dynamic-app-icon';
+} from '@krishnavmk/react-native-dynamic-app-icon';
 import {
   THEMES,
   DEFAULT_THEME_DATA,
@@ -128,7 +128,7 @@ const IconAndSplashController = ({
               resizeMode="contain"
             />
           </View>
-          <Text style={styles.heading}>@krishnavmalak/react-native-dynamic-app-icon</Text>
+          <Text style={styles.heading}>@krishnavmk/react-native-dynamic-app-icon</Text>
           <Text style={styles.subheading}>
             {brand?.appName || DEFAULT_THEME_DATA.brandConfig.appName}
           </Text>
@@ -279,7 +279,7 @@ const MainApp = () => {
   const [splashVisible, setSplashVisible] = useState(true);
   const [splashConfig, setSplashConfig] = useState({
     title: 'Dynamic App Icon',
-    subtitle: '@krishnavmalak/react-native-dynamic-app-icon',
+    subtitle: '@krishnavmk/react-native-dynamic-app-icon',
     background: '#F8F9FA',
     animation: 'scale' as const,
     logo: DEFAULT_THEME_DATA.ui.localIcon,
