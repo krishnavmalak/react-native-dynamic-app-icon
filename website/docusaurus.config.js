@@ -7,14 +7,14 @@ export default {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'dynamic-branding', 
-  projectName: '@krishnavmk/react-native-dynamic-app-icon', 
+  projectName: '@krishnavm/react-native-dynamic-app-icon', 
   presets: [
     [
       'classic',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/dynamic-branding/@krishnavmk/react-native-dynamic-app-icon/tree/main/website/',
+          editUrl: 'https://github.com/dynamic-branding/@krishnavm/react-native-dynamic-app-icon/tree/main/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -33,7 +33,7 @@ export default {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/dynamic-branding/@krishnavmk/react-native-dynamic-app-icon',
+          href: 'https://github.com/dynamic-branding/@krishnavm/react-native-dynamic-app-icon',
           label: 'GitHub',
           position: 'right',
         },

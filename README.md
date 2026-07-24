@@ -1,8 +1,8 @@
-# @krishnavmk/react-native-dynamic-app-icon 🎨✨
+# @krishnavm/react-native-dynamic-app-icon 🎨✨
 
 > Programmatic **Dynamic App Icon Switching** & **Animated Dynamic Splash Screens** for React Native & Expo (iOS & Android).
 
-[![npm version](https://badge.fury.io/js/@krishnavmk/react-native-dynamic-app-icon.svg)](https://www.npmjs.com/package/@krishnavmk/react-native-dynamic-app-icon)
+[![npm version](https://badge.fury.io/js/@krishnavm/react-native-dynamic-app-icon.svg)](https://www.npmjs.com/package/@krishnavm/react-native-dynamic-app-icon)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
@@ -23,10 +23,10 @@
 
 ```bash
 # npm
-npm install @krishnavmk/react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
+npm install @krishnavm/react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
 
 # yarn
-yarn add @krishnavmk/react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
+yarn add @krishnavm/react-native-dynamic-app-icon @react-native-async-storage/async-storage expo-asset expo-file-system
 
 # iOS pod install
 cd ios && pod install
@@ -43,7 +43,7 @@ Add the config plugin to your `app.json`. List every dynamic app icon name:
   "expo": {
     "plugins": [
       [
-        "@krishnavmk/react-native-dynamic-app-icon",
+        "@krishnavm/react-native-dynamic-app-icon",
         {
           "icons": [
             "apple",
@@ -67,7 +67,7 @@ Run `npx expo prebuild` to automatically inject native activity-aliases on Andro
 ### 1. Dynamic App Icon Switching
 
 ```ts
-import { Branding } from '@krishnavmk/react-native-dynamic-app-icon';
+import { Branding } from '@krishnavm/react-native-dynamic-app-icon';
 
 // Change launcher icon
 await Branding.changeIcon('orange');
@@ -83,7 +83,7 @@ const currentIcon = await Branding.getCurrentIcon(); // 'orange' | 'Default'
 
 ```tsx
 import React, { useState } from 'react';
-import { DynamicSplashScreen } from '@krishnavmk/react-native-dynamic-app-icon';
+import { DynamicSplashScreen } from '@krishnavm/react-native-dynamic-app-icon';
 
 export default function App() {
   const [splashVisible, setSplashVisible] = useState(true);
