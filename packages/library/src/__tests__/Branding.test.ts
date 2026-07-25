@@ -2,7 +2,7 @@ import { DynamicAppIcon, Branding } from '../DynamicAppIcon';
 import { AppIconManager, BrandManager } from '../AppIconManager';
 import { IconManager } from '../IconManager';
 
-describe('@krishnavm/@krishnavm/react-native-dynamic-app-icon', () => {
+describe('@krishnavmk/@krishnavmk/react-native-dynamic-app-icon', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

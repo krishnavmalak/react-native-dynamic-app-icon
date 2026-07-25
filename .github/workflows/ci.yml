@@ -50,7 +50,7 @@ jobs:
       - name: Build Android AAR
         run: |
           cd example/android
-          ./gradlew :krishnavmalak-react-native-dynamic-app-icon:assembleRelease
+          ./gradlew :krishnavm-react-native-dynamic-app-icon:assembleRelease
 
   build-ios:
     runs-on: macos-latest
@@ -81,8 +81,7 @@ jobs:
       - run: npm ci
       - run: npm run build --workspace=packages/library
       
-      # Using release-it or semantic-release in a real-world scenario
-      # - run: npx semantic-release
+      - name: Publish to NPM
+        run: npm publish --workspace=packages/library --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
