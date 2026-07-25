@@ -5,6 +5,11 @@
     "access": "public"
   },
   "description": "Complete runtime branding library for React Native New Architecture",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krishnavmk/react-native-dynamic-app-icon.git",
+    "directory": "packages/library"
+  },
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
