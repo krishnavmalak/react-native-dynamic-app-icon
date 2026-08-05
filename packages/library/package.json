@@ -1,6 +1,6 @@
 {
   "name": "@krishnavm/react-native-dynamic-app-icon",
-  "version": "1.0.4",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
