@@ -86,3 +86,5 @@ jobs:
       
       - name: Publish to NPM (with Provenance)
         run: npm publish --workspace=packages/library --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
