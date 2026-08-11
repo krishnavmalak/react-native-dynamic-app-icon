@@ -32,6 +32,11 @@ yarn add @krishnavm/react-native-dynamic-app-icon @react-native-async-storage/as
 cd ios && pod install
 ```
 
+### Peer Dependencies
+This library requires the following peer dependencies for full functionality:
+- `@react-native-async-storage/async-storage` (>=1.17.0): Required for both Icon & Splash state persistence.
+- `expo-asset` & `expo-file-system` (>=18.0.0): Required **only** for the Dynamic Splash Screen feature (downloading/caching remote splash assets). If you only use dynamic icons in a bare React Native app, you can omit these.
+
 ---
 
 ## ⚙️ Setup — Expo Config Plugin
@@ -65,6 +70,8 @@ Run `npx expo prebuild` to automatically inject native activity-aliases on Andro
 ## 🚀 Usage
 
 ### 1. Dynamic App Icon Switching
+
+Full TypeScript support is included out-of-the-box for better developer experience and autocompletion.
 
 ```ts
 import { Branding } from '@krishnavm/react-native-dynamic-app-icon';
@@ -166,4 +173,4 @@ We welcome contributions! To get started:
 
 ## 📄 License
 
-MIT © Senior Architect
+MIT © Krishna

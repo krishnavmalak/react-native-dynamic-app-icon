@@ -43,6 +43,22 @@ describe('@krishnavm/@krishnavm/react-native-dynamic-app-icon', () => {
     expect(result).toBe(true);
   });
 
+  it('should call IconManager when restoring default icon', async () => {
+    const restoreSpy = jest.spyOn(IconManager, 'restoreDefaultIcon').mockResolvedValue(true);
+    const result = await DynamicAppIcon.restoreDefaultIcon();
+    
+    expect(restoreSpy).toHaveBeenCalled();
+    expect(result).toBe(true);
+  });
+
+  it('should call IconManager when getting current icon', async () => {
+    const getSpy = jest.spyOn(IconManager, 'getCurrentIcon').mockResolvedValue('orange');
+    const result = await DynamicAppIcon.getCurrentIcon();
+    
+    expect(getSpy).toHaveBeenCalled();
+    expect(result).toBe('orange');
+  });
+
   it('should fall back to validating remote assets when expo-file-system is unavailable', async () => {
     const fetchSpy = jest
       .spyOn(globalThis as any, 'fetch')

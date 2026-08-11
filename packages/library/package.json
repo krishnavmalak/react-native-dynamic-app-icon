@@ -1,6 +1,6 @@
 {
   "name": "@krishnavm/react-native-dynamic-app-icon",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publishConfig": {
     "access": "public"
   },
@@ -50,7 +50,7 @@
     "dynamic-icon",
     "white-label"
   ],
-  "author": "Senior Architect",
+  "author": "Krishna",
   "license": "MIT",
   "peerDependencies": {
     "@react-native-async-storage/async-storage": ">=1.17.0",
