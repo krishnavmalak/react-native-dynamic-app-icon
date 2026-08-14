@@ -50,7 +50,7 @@ jobs:
       - name: Build Android AAR
         run: |
           cd example/android
-          ./gradlew :krishnavm-react-native-dynamic-app-icon:assembleRelease
+          ./gradlew :krishnavm_react-native-dynamic-app-icon:assembleRelease
 
   build-ios:
     runs-on: macos-latest
