@@ -128,7 +128,7 @@ const IconAndSplashController = ({
               resizeMode="contain"
             />
           </View>
-          <Text style={styles.heading}>@krishnavm/react-native-dynamic-app-icon</Text>
+          <Text style={styles.heading}>Dynamic App Icon</Text>
           <Text style={styles.subheading}>
             {brand?.appName || DEFAULT_THEME_DATA.brandConfig.appName}
           </Text>
@@ -279,7 +279,7 @@ const MainApp = () => {
   const [splashVisible, setSplashVisible] = useState(true);
   const [splashConfig, setSplashConfig] = useState({
     title: 'Dynamic App Icon',
-    subtitle: '@krishnavm/react-native-dynamic-app-icon',
+    subtitle: '',
     background: '#F8F9FA',
     animation: 'scale' as const,
     logo: DEFAULT_THEME_DATA.ui.localIcon,
