@@ -37,6 +37,37 @@ exports.withDynamicIconAndroid = void 0;
 const config_plugins_1 = require("@expo/config-plugins");
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
+const hasAction = (intentFilter, actionName) => intentFilter.action?.some((entry) => entry.$?.['android:name'] === actionName) ?? false;
+const hasCategory = (intentFilter, categoryName) => intentFilter.category?.some((entry) => entry.$?.['android:name'] === categoryName) ?? false;
+function ensureDefaultMainIntentFilter(activity) {
+    const intentFilters = activity['intent-filter'] ?? [];
+    const hasMainDefaultFilter = intentFilters.some((intentFilter) => hasAction(intentFilter, 'android.intent.action.MAIN') &&
+        hasCategory(intentFilter, 'android.intent.category.DEFAULT'));
+    if (!hasMainDefaultFilter) {
+        intentFilters.push({
+            action: [{ $: { 'android:name': 'android.intent.action.MAIN' } }],
+            category: [{ $: { 'android:name': 'android.intent.category.DEFAULT' } }],
+        });
+    }
+    activity['intent-filter'] = intentFilters;
+}
+function removeLauncherCategoryFromMainActivity(activity) {
+    const intentFilters = activity['intent-filter'] ?? [];
+    activity['intent-filter'] = intentFilters
+        .map((intentFilter) => {
+        const isMainLauncherFilter = hasAction(intentFilter, 'android.intent.action.MAIN') &&
+            hasCategory(intentFilter, 'android.intent.category.LAUNCHER');
+        if (!isMainLauncherFilter) {
+            return intentFilter;
+        }
+        const remainingCategories = intentFilter.category?.filter((entry) => entry.$?.['android:name'] !== 'android.intent.category.LAUNCHER') ?? [];
+        return {
+            ...intentFilter,
+            category: remainingCategories,
+        };
+    })
+        .filter((intentFilter) => (intentFilter.category?.length ?? 0) > 0);
+}
 const withDynamicIconAndroid = (config, { icons }) => {
     config = (0, config_plugins_1.withDangerousMod)(config, [
         'android',
@@ -69,15 +100,11 @@ const withDynamicIconAndroid = (config, { icons }) => {
         if (!packageName)
             return config;
         // 1. Give host MainActivity a DEFAULT category MAIN intent-filter so ADB am start succeeds while OS launcher uses activity-aliases
-        const activities = mainApplication.activity || [];
+        const activities = (mainApplication.activity || []);
         const mainActivity = activities.find((act) => act.$?.['android:name'] === '.MainActivity' || act.$?.['android:name'] === `${packageName}.MainActivity`);
         if (mainActivity) {
-            mainActivity['intent-filter'] = [
-                {
-                    action: [{ $: { 'android:name': 'android.intent.action.MAIN' } }],
-                    category: [{ $: { 'android:name': 'android.intent.category.DEFAULT' } }],
-                },
-            ];
+            removeLauncherCategoryFromMainActivity(mainActivity);
+            ensureDefaultMainIntentFilter(mainActivity);
         }
         const firstIcon = icons[0] || 'apple';
         const resourceNameForIcon = (icon) => (icon === 'default' ? 'app_default' : icon);

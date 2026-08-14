@@ -66,7 +66,7 @@ export const THEMES = {
     },
     ui: {
       subtitle: 'Sweet, juicy & vibrant berry',
-      localIcon: require('../assets/strawberry.jpg'),
+      localIcon: require('../assets/strawberry.png'),
     },
   },
 } as const;

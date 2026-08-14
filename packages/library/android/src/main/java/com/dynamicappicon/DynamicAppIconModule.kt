@@ -31,53 +31,50 @@ class DynamicAppIconModule(private val reactContext: ReactApplicationContext) :
                 return
             }
 
-            var targetFound = false
-
-            for (component in components) {
+            val aliasComponents = components.filter { component ->
                 val className = component.className
-
-                // DO NOT disable host MainActivity. Only toggle activity-aliases.
-                if (className == "$packageName.MainActivity" || className.endsWith(".MainActivity")) {
-                    continue
-                }
-
-                if (!className.contains("MainActivity")) {
-                    continue
-                }
-
-                val isDefaultAlias = className.endsWith(".MainActivityDefault", ignoreCase = true)
-
-                val shouldEnable = if (isDefaultTarget) {
-                    isDefaultAlias
-                } else {
-                    className.endsWith("MainActivity$iconName", ignoreCase = true) ||
-                    className.endsWith("MainActivity_$iconName", ignoreCase = true) ||
-                    className.endsWith(".$iconName", ignoreCase = true)
-                }
-
-                if (shouldEnable) {
-                    targetFound = true
-                }
-
-                val newState = if (shouldEnable) {
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                } else {
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-                }
-
-                pm.setComponentEnabledSetting(
-                    component,
-                    newState,
-                    PackageManager.DONT_KILL_APP
-                )
+                className != "$packageName.MainActivity" &&
+                !className.endsWith(".MainActivity") &&
+                className.contains("MainActivity")
             }
 
-            if (!isDefaultTarget && !targetFound) {
+            val targetComponent = aliasComponents.find { component ->
+                val className = component.className
+                val isDefaultAlias = className.endsWith(".MainActivityDefault", ignoreCase = true)
+
+                if (isDefaultTarget) {
+                    isDefaultAlias
+                } else {
+                    className.endsWith("MainActivity$normalizedTarget", ignoreCase = true) ||
+                    className.endsWith("MainActivity_$normalizedTarget", ignoreCase = true) ||
+                    className.endsWith(".$normalizedTarget", ignoreCase = true)
+                }
+            }
+
+            if (targetComponent == null) {
                 promise.reject(
                     "ICON_NOT_FOUND",
                     "Activity alias for icon '$iconName' was not found in AndroidManifest.xml"
                 )
                 return
+            }
+
+            // Enable the target launcher entry first. Disabling the current alias before
+            // enabling the next one causes some launchers to keep the stale icon.
+            pm.setComponentEnabledSetting(
+                targetComponent,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP
+            )
+
+            aliasComponents.forEach { component ->
+                if (component != targetComponent) {
+                    pm.setComponentEnabledSetting(
+                        component,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP
+                    )
+                }
             }
 
             promise.resolve(true)

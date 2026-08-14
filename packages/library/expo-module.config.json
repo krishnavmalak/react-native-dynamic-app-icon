@@ -1,9 +1,0 @@
-{
-  "platforms": ["ios", "android"],
-  "android": {
-    "packageNames": ["com.dynamicappicon.DynamicAppIconPackage"]
-  },
-  "ios": {
-    "modules": ["DynamicAppIcon"]
-  }
-}

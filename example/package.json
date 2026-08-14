@@ -5,27 +5,19 @@
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "postinstall": "ln -sfn ../../../packages/library node_modules/@krishnavm/react-native-dynamic-app-icon"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^3.1.1",
-    "expo": "~57.0.8",
-    "expo-asset": "~57.0.7",
-    "expo-file-system": "~57.0.1",
+    "@krishnavm/react-native-dynamic-app-icon": "file:../packages/library",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "~57.0.12",
+    "expo-asset": "~57.0.10",
+    "expo-file-system": "~57.0.2",
     "react": "19.2.3",
-    "react-native": "0.86.0",
-    "@krishnavm/react-native-dynamic-app-icon": "*"
+    "react-native": "0.86.2"
   },
   "devDependencies": {
     "typescript": "~6.0.3"
-  },
-  "expo": {
-    "doctor": {
-      "reactNativeDirectoryCheck": {
-        "exclude": [
-          "@krishnavm/react-native-dynamic-app-icon"
-        ]
-      }
-    }
   }
 }

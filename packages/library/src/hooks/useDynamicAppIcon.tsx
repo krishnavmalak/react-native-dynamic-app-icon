@@ -23,12 +23,26 @@ export const DynamicAppIconProvider: React.FC<{ children: React.ReactNode }> = (
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Initialize: restore persisted brand + theme from MMKV storage
-    DynamicAppIcon.initialize().then(() => {
-      setBrandState(DynamicAppIcon.getBrand());
-      setThemeState(DynamicAppIcon.getTheme());
-      setIsInitialized(true);
-    });
+    let isMounted = true;
+
+    // Restore persisted brand and theme, but never leave consumers blocked on init failure.
+    DynamicAppIcon.initialize()
+      .catch((error) => {
+        console.warn('[DynamicAppIconProvider] Failed to initialize persisted state:', error);
+      })
+      .finally(() => {
+        if (!isMounted) {
+          return;
+        }
+
+        setBrandState(DynamicAppIcon.getBrand());
+        setThemeState(DynamicAppIcon.getTheme());
+        setIsInitialized(true);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleSetBrand = useCallback(async (id: string, config: BrandConfig) => {

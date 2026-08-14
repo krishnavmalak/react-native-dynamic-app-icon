@@ -5,6 +5,47 @@
 
 RCT_EXPORT_MODULE(DynamicAppIcon)
 
+/**
+ * setAlternateIconName: on the iOS Simulator sporadically returns
+ * "Resource temporarily unavailable" (EAGAIN / error code 11).
+ * This is a known Apple bug — the fix is to retry with a short delay.
+ */
++ (void)setIconName:(NSString * _Nullable)iconName
+            attempt:(int)attempt
+           resolver:(RCTPromiseResolveBlock)resolve
+           rejecter:(RCTPromiseRejectBlock)reject
+{
+    static const int kMaxAttempts = 5;
+    static const double kRetryDelaySeconds = 0.35;
+
+    [UIApplication.sharedApplication setAlternateIconName:iconName completionHandler:^(NSError *error) {
+        if (!error) {
+            resolve(@(YES));
+            return;
+        }
+
+        // EAGAIN = 11 — "Resource temporarily unavailable", simulator-only transient error
+        BOOL isTransient = (error.domain == NSPOSIXErrorDomain && error.code == 11)
+                         || [error.localizedDescription containsString:@"Resource temporarily unavailable"];
+
+        if (isTransient && attempt < kMaxAttempts) {
+            dispatch_after(
+                dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kRetryDelaySeconds * NSEC_PER_SEC)),
+                dispatch_get_main_queue(),
+                ^{
+                    RCTLogInfo(@"[DynamicAppIcon] Retrying setAlternateIconName (attempt %d/%d)", attempt + 1, kMaxAttempts);
+                    [DynamicAppIcon setIconName:iconName
+                                       attempt:attempt + 1
+                                      resolver:resolve
+                                      rejecter:reject];
+                }
+            );
+        } else {
+            reject(@"ICON_CHANGE_FAILED", error.localizedDescription, error);
+        }
+    }];
+}
+
 RCT_EXPORT_METHOD(changeIcon:(NSString *)iconName
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
@@ -21,6 +62,7 @@ RCT_EXPORT_METHOD(changeIcon:(NSString *)iconName
                                 [trimmedName length] == 0 ||
                                 [trimmedName.lowercaseString isEqualToString:@"default"]);
 
+        // Already on the requested icon — resolve immediately
         if ((currentIcon == nil && isDefaultTarget) ||
             (currentIcon != nil && [currentIcon isEqualToString:trimmedName])) {
             resolve(@(YES));
@@ -28,13 +70,7 @@ RCT_EXPORT_METHOD(changeIcon:(NSString *)iconName
         }
 
         NSString *targetIcon = isDefaultTarget ? nil : trimmedName;
-        [UIApplication.sharedApplication setAlternateIconName:targetIcon completionHandler:^(NSError *error) {
-            if (error) {
-                reject(@"ICON_CHANGE_FAILED", error.localizedDescription, error);
-            } else {
-                resolve(@(YES));
-            }
-        }];
+        [DynamicAppIcon setIconName:targetIcon attempt:1 resolver:resolve rejecter:reject];
     });
 }
 
@@ -42,13 +78,7 @@ RCT_EXPORT_METHOD(restoreDefaultIcon:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIApplication.sharedApplication setAlternateIconName:nil completionHandler:^(NSError *error) {
-            if (error) {
-                reject(@"ICON_RESTORE_FAILED", error.localizedDescription, error);
-            } else {
-                resolve(@(YES));
-            }
-        }];
+        [DynamicAppIcon setIconName:nil attempt:1 resolver:resolve rejecter:reject];
     });
 }
 

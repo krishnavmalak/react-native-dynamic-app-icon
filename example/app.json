@@ -25,7 +25,8 @@
             "strawberry"
           ]
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }

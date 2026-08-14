@@ -7,3 +7,5 @@ dist/
 
 packages/*/android/build/
 packages/*/ios/build/
+packages/*/plugin/build/
+packages/library/android/build-*/
