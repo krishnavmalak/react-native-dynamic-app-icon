@@ -115,6 +115,80 @@ export default function App() {
 
 ---
 
+## 💡 Advanced Real-World Use Cases
+
+### Example 1: API-Driven Promotional Icons
+If you want to control the icon dynamically from your backend API without updating the app on the app store, you can fetch the current active icon campaign from your server:
+
+```tsx
+import React, { useEffect } from 'react';
+import { Branding } from '@krishnavm/react-native-dynamic-app-icon';
+
+export default function App() {
+  useEffect(() => {
+    fetchActiveAppIcon();
+  }, []);
+
+  const fetchActiveAppIcon = async () => {
+    try {
+      // 1. Fetch from your backend
+      const response = await fetch('https://api.yourdomain.com/app-config');
+      const data = await response.json();
+      
+      // 2. Check if an alternate icon should be active
+      if (data.isActive && data.activeIcon) {
+        await Branding.changeIcon(data.activeIcon);
+      } else {
+        await Branding.restoreDefaultIcon();
+      }
+    } catch (error) {
+      console.log('Failed to fetch icon config:', error);
+    }
+  };
+
+  return <MainAppContent />;
+}
+```
+
+### Example 2: Seasonal & Date-Based Icons
+Automatically switch the app icon based on the current date (e.g. Halloween or Christmas). Combine this with a background fetch library to change the icon silently overnight!
+
+```tsx
+import React, { useEffect } from 'react';
+import { Branding } from '@krishnavm/react-native-dynamic-app-icon';
+
+export default function App() {
+  useEffect(() => {
+    checkAndSetSeasonalIcon();
+  }, []);
+
+  const checkAndSetSeasonalIcon = async () => {
+    const today = new Date();
+    const month = today.getMonth(); // 0 = Jan, 11 = Dec
+    const date = today.getDate();
+
+    try {
+      // Halloween: Oct 25 - Oct 31
+      if (month === 9 && date >= 25 && date <= 31) {
+        await Branding.changeIcon('halloween');
+      } 
+      // Winter/Holiday: All of December
+      else if (month === 11) {
+        await Branding.changeIcon('holiday');
+      } else {
+        await Branding.restoreDefaultIcon();
+      }
+    } catch (error) {
+      console.log('Error setting seasonal icon:', error);
+    }
+  };
+
+  return <MainAppContent />;
+}
+```
+
+---
+
 ## 📖 API Reference
 
 ### `Branding` (Dynamic App Icon)
